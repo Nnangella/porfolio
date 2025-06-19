@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mon Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --bg: #f5f5f5;
+      --text: #333;
+      --primary: #1f2937;
+      --accent: #3b82f6;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .dark-mode {
+      --bg: #1e1e1e;
+      --text: #f5f5f5;
+      --primary: #111827;
+    }
+
+    header {
+      background-color: var(--primary);
+      color: white;
+      padding: 2rem;
+      text-align: center;
+      position: relative;
+    }
+
+    nav a {
+      margin: 0 1rem;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    section {
+      padding: 2rem;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    h2 {
+      border-bottom: 2px solid #ccc;
+      padding-bottom: 0.5rem;
+    }
+
+    .projets {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .projet {
+      background-color: white;
+      border-radius: 12px;
+      padding: 1rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s ease;
+      background-image: image(20240106_160104jpg);
+    }
+
+    .projet:hover {
+      transform: translateY(-5px);
+    }
+
+    footer {
+      background-color: var(--primary);
+      color: white;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    .toggle-mode {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      max-width: 500px;
+    }
+
+    input,
+    textarea {
+      padding: 0.5rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    input[type="submit"] {
+      background-color: var(--accent);
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      border: none;
+    }
+
+    .profile-photo {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid white;
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    ul li {
+      background: #ddd;
+      margin: 5px 0;
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    .cv-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      padding: 0.75rem 1.75rem;
+      background: linear-gradient(135deg, var(--accent), #2563eb);
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .cv-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .cv-button svg {
+      width: 20px;
+      height: 20px;
+      fill: white;
+    }
+
+    .about-image {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      border-radius: 12px;
+      margin: 1rem 0;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .about-image {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      border-radius: 12px;
+      margin: 1rem 0;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .about-image:hover {
+      transform: scale(1.05);
+    }
+
+    ul li {
+      background: #ddd;
+      margin: 5px 0;
+      padding: 10px;
+      border-radius: 5px;
+      transition: transform 0.3s ease;
+    }
+
+    ul li:hover {
+      transform: scale(1.05);
+    }
+
+    .projet-image {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      transition: transform 0.3s ease;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .projet-image:hover {
+      transform: scale(1.05);
+    }
+
+    .project-button {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.6rem 1.2rem;
+      background-color: var(--accent);
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 6px;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .project-button:hover {
+      background-color: #2563eb;
+      transform: translateY(-3px);
+    }
+
+    .about-image {
+      display: block;
+      width: 350px;
+      height: auto;
+      border-radius: 12px;
+      margin: 1rem auto;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .about-image:hover {
+      transform: scale(1.05);
+    }
+
+    #about p {
+      text-align: justify;
+      transition: color 0.3s ease;
+    }
+
+    #about p:hover {
+      color: var(--accent);
+    }
+
+    .marquee-vertical {
+      position: relative;
+      height: 150px;
+      /* hauteur visible du conteneur */
+      overflow: hidden;
+    }
+
+    .marquee-vertical p {
+      position: absolute;
+      width: 100%;
+      animation: marquee-vertical 10s linear infinite;
+      text-align: justify;
+      transition: color 0.3s ease;
+    }
+
+    .marquee-vertical p:hover {
+      color: var(--accent);
+    }
+
+    @keyframes marquee-vertical {
+      0% {
+        top: 100%;
+      }
+
+      100% {
+        top: -100%;
+      }
+    }
+
+    .marquee-horizontal {
+      overflow: hidden;
+      white-space: nowrap;
+      box-sizing: border-box;
+    }
+
+    .marquee-horizontal p {
+      display: inline-block;
+      padding-left: 100%;
+      animation: marquee-horizontal 15s linear infinite;
+      text-align: justify;
+      transition: color 0.3s ease;
+    }
+
+    .marquee-horizontal p:hover {
+      color: var(--accent);
+    }
+
+    @keyframes marquee-horizontal {
+      0% {
+        transform: translateX(0%);
+      }
+
+      100% {
+        transform: translateX(-100%);
+        animation: marquee-horizontal 15s linear infinite;
+      }
+    }
+
+    a.button {
+      display: inline-block;
+      background: var(--accent);
+      color: white;
+      padding: 0.5rem 1.2rem;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
+
+    a.button:hover {
+      background: #2563eb;
+      /* une teinte un peu plus foncée */
+    }
+
+    section {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 1s ease forwards;
+    }
+
+    section:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    section:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    section:nth-child(4) {
+      animation-delay: 0.6s;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    body.dark-mode {
+      --bg: #121212;
+      --text: #eee;
+      --primary: #0d0d0d;
+      --accent: #3b82f6;
+    }
+
+    .projet-image {
+      width: 100%;
+      height: 150px;
+      background-size: cover;
+      background-position: center;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+
+    #contact i {
+      margin-right: 0.5rem;
+      color: var(--accent);
+    }
+
+    .about-container {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+
+    .about-text {
+      flex: 1 1 300px;
+    }
+
+    .about-image {
+      width: 350px;
+      max-width: 100%;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .about-image:hover {
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 768px) {
+      .about-container {
+        flex-direction: column-reverse;
+        text-align: center;
+      }
+    }
+
+    #contact a i {
+      margin-right: 0.5rem;
+      color: #25D366;
+      /* couleur verte WhatsApp */
+      font-size: 1.2rem;
+    }
+  </style>
+</head>
+
+<body>
+  <button class="toggle-mode" onclick="document.body.classList.toggle('dark-mode')">🌙 /☀️</button>
+  <header>
+    <img src="AAA.jpg" alt="Ma photo" class="profile-photo">
+    <h1>N'NANG ELLA Alphonse Yves</h1>
+    <p>I N F O R M A T I C I E N / Administrateur base de données</p>
+    <nav>
+      <a href="#about">À propos</a>
+      <a href="#skills">Compétences</a>
+      <a href="#projects">Projets</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section id="about">
+    <h2>À propos de moi</h2>
+    <div class="about-container">
+      <div class="about-text marquee-vertical">
+        <p>
+          Actuellement inscrit à l'Institut Africaine de l'Informatique, je poursuis un
+          parcours d'ingénieur de conception informatique après l'obtention récente
+          du Brevet de Technicien Supérieur en Informatique et Réseau pour l'industrie
+          et les services (IRIS) à l'Institut de Technologie d'Owendo, lequel j'ai intégré
+          après l'obtention d'un baccalauréat général série D. 
+        </p>
+      </div>
+      <img src="Screenshot_20240203_182350_Photo Editor.jpg" alt="Photo illustrative" class="about-image">
+    </div>
+
+    <a href="CV N'NANG.pdf" download class="cv-button">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M12 16l4-5h-3V4h-2v7H8l4 5zm-9 2h18v2H3v-2z" />
+      </svg>
+      Télécharger mon CV
+    </a>
+  </section>
+
+  <section id="skills">
+    <h2>Compétences</h2>
+    <ul>
+      <li>HTML</li>
+      <li>CSS</li>
+      <li>Python</li>
+      <li>Pascal</li>
+      <li>Résau</li>
+      <li>Maintenance</li>
+      <li>Base de données</li>
+      <li>Execel</li>
+      <li>World</li>
+      <li>Powerpoint</li>
+      <li>JavaScript</li>
+    </ul>
+  </section>
+
+  <section id="projects">
+    <h2>Projets</h2>
+    <div class="projets">
+      <div class="projet">
+        <img src="ilustrasi-manajemen-proyek-daring-online-penuh-892eac5a.jpeg" alt="Aperçu du projet 1"
+          class="projet-image">
+        <h3>Projet 1</h3>
+        <p>Archivage des rapports de stages</p>
+        <p><strong>Technos :</strong> HTML, CSS, JS</p>
+        <a href="http://Samuel1007.pythonanywhere.com" class="project-button">Voir le projet</a>
+      </div>
+      <div class="projet">
+        <img src="projectcycle.jpg" alt="Aperçu du projet 2" class="projet-image">
+        <h3>Projet 2</h3>
+        <p>Orientation poste Bac</p>
+        <p><strong>Technos :</strong> HTML, CSS</p>
+        <a href="http://orient-bac.netlify.app" class="project-button">Voir le projet</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <form>
+      <input type="text" placeholder="Votre nom" required>
+      <input type="email" placeholder="Votre email" required>
+      <textarea placeholder="Votre message" rows="5" required></textarea>
+      <input type="submit" value="Envoyer">
+    </form>
+
+    <p>Email :
+      <a href="mailto:nnangellaalphonseyves@gmail.com">
+        <i class="fa-solid fa-envelope"></i> nnangellaalphonseyves@gmail.com
+      </a>
+    </p>
+
+    <p>LinkedIn :
+      <a href="https://linkedin.com/in/alphonse-yves-nnang-ella-3b3b43362" target="_blank">
+        <i class="fa-brands fa-linkedin"></i> Profil
+      </a>
+    </p>
+
+    <p>GitHub :
+      <a href="https://github.com/Nnangella/sitewebAgTrans.git" target="_blank">
+        <i class="fa-brands fa-github"></i> GitHub
+      </a>
+    </p>
+
+    <p>WhatsApp :
+      <a href="https://wa.me/24174737241" target="_blank">
+        <i class="fa-brands fa-whatsapp"></i> 074-73-72-41
+      </a>
+    </p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 N'NANG ELLA Alphonse Yves - Tous droits réservés</p>
+  </footer>
+</body>
+
+</html>
